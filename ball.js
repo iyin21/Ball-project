@@ -1,21 +1,55 @@
 class Ball{
-	constructor(radius, weight, color, x_position, y_position){
+	constructor(radius, weight, color, x, y){
 		this.r = radius
 		this.w = weight
 		this.c = color
-		this.x = x_position
-		this.y = y_position
+		this.x = x
+		this.y = y
+		this.dx =1
+		this.dy =-1
 	}
-	draw(){
-		
+	draw(){	
 		const canvas = document.getElementById("circle");
 		const ctx = canvas.getContext("2d");
 		ctx.beginPath();
-		ctx.arc((this.x/100) *500, (this.y/100) *500, this.r, 0, 2 * Math.PI);
+		ctx.arc((this.x/100) *canvas.width, (this.y/100) *canvas.height, this.r, 0, 2 * Math.PI);
 		ctx.stroke();
 		ctx.fillStyle = this.c;
 		ctx.fill();
 	}
+	moveBall(){	
+	    this.x += this.dx * Math.sin(30);
+	    this.y += this.dy * Math.cos(30);
+	}
+	 collisionDetection(){
+	 	const canvas = document.getElementById("circle");
+	 	if((this.x/100) *canvas.width+ this.dx > canvas.width-this.r || this.x/100 *canvas.width + this.dx < this.r) {
+        	this.dx = -this.dx;
+	    }
+	    if(this.y/100 *canvas.height + this.dy < this.r) {
+	        this.dy = -this.dy;
+	    }
+	    // if((this.y/100) *canvas.height + this.dy> canvas.height-this.r && ((this.y/100) *canvas.height) > ((this.y/100) *canvas.height - 50)){
+	    // 	if((this.x/100) *canvas.width > (canvas.width-70)/2 && this.x/100 *canvas.width < (canvas.width/2) + 70) {
+	    // 		this.dy = -this.dy;
+	    // 	}	
+	    // }	
+	    if((this.y/100) *canvas.height + this.dy > canvas.height-this.r ){
+			if((this.x/100) *canvas.width > (canvas.width-70)/2 && this.x/100 *canvas.width < (canvas.width/2) + 70) {
+		    	if (((this.y/100) *canvas.height) > ((this.y/100) *canvas.height - 50)) {
+	        		 this.dy = -this.dy;
+	        		 //this.y/100 *canvas.height= (this.y/100) *canvas.height - 50;
+	        	}
+		    	
+		    }
+		    else {
+        		this.dy = -this.dy;
+        	}	
+	    }
+
+	    this.x += this.dx * Math.sin(60);
+	    this.y += this.dy * Math.cos(60);  
+    }
 }	
 
 // function renderBallsToScene(){

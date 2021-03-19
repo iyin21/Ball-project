@@ -8,14 +8,14 @@ class Bat{
 		this.y = yposition 
 	}
 	rectangle(){
-		var c = document.getElementById("circle");
-		var ctx = c.getContext("2d");
+		const c = document.getElementById("circle");
+		const ctx = c.getContext("2d");
 		// ctx.beginPath();
 		
 		// //ctx.rect(30, 450, 70, 20);
 		// ctx.stroke();
 		ctx.fillStyle = this.color;
-		ctx.fillRect((this.x/100) *500, (this.y/100) *500, this.width, this.height);
+		ctx.fillRect(this.x/100 *(c.width-70), (this.y/100) *c.width, this.width, this.height);
 
 	}
 }
