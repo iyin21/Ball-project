@@ -12,6 +12,16 @@ class Game{
 		this.batConfig = config.batConfig
 		this.ballConfig =config.ballConfig
 	}
+	start(){
+		for(let i=this.bricksConfig.length-1; i>=0; i--) {
+        	for(var j=this.bricksConfig[i].length-1; j>=0; j--) {
+        		const brick = this.bricksConfig[i][j]
+				let brick1 = new Brick(brick.color, brick.height, brick.width, 20, ((brick.width+7) *j)+2, i*(25+15)+10)
+				bricks.push(brick1)
+			}
+		}		
+
+	}
 	 renderToDom(){
 	 	let scene = new Scene(this.sceneConfig.backgroundColor, this.sceneConfig.width, this.sceneConfig.height)
 	 	let ball = new Ball(this.ballConfig.radius, this.ballConfig.weight, this.ballConfig.color, this.ballConfig.xPosition, this.ballConfig.yPosition)
@@ -21,13 +31,6 @@ class Game{
 	 		ctx.clearRect(0, 0, this.sceneConfig.width, this.sceneConfig.height);
 	 		scene.setBackground()
 			ball.draw();
-			for(let i=this.bricksConfig.length-1; i>=0; i--) {
-	        	for(var j=this.bricksConfig[i].length-1; j>=0; j--) {
-	        		const brick = this.bricksConfig[i][j]
-					let brick1 = new Brick(brick.color, brick.height, brick.width, 20, ((brick.width+7) *j)+2, i*(25+15)+10)
-					bricks.push(brick1)
-				}
-			}		
 
 		
 			for(let i= bricks.length-1; i>=0; i--){
@@ -82,8 +85,9 @@ let ballConfig = {
 
 let config = {sceneConfig, bricksConfig, batConfig, ballConfig}
 let game= new Game(config);
-
 game.renderToDom();
+game.start();
+
 //requestAnimationFrame(game.renderToDom());
 // const animate = () => {
 // 	game.renderToDom();
