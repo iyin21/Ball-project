@@ -2,15 +2,18 @@ import Ball from "/ball.js";
 import Scene from "/scene.js";
 import Bat from "/bat.js";
 import Brick from "/brick.js";
-//import Game from "/game.js";
 
-//const bricks = []
 class Game{
 	//constructor(config){
 		//this.x = config.x ||0;
 	//}
-	constructor(config={}){
-		this.screenConfig=config.screenConfig
+	constructor(config={
+			sceneConfig: sceneConfig,
+			// bricksConfig: bricksConfig,
+			// batConfig: batConfig,
+			ballConfig: ballConfig
+		}){
+		this.sceneConfig=config.sceneConfig
 		this.bricksConfig = config.bricksConfig
 		this.batConfig = config.batConfig
 		this.ballConfig =config.ballConfig
@@ -18,15 +21,20 @@ class Game{
 		// this.state={
 		// 	gameState: "start"
 		//}
-		
+		// this.scene =new Scene(this.screenConfig.backgroundC., )
+		// scene.setBackground()
 	}
-	 renderToDom(domElement){
+	 renderToDom(){
+	 	const ctx = this.sceneConfig.domElement.getContext("2d");
 	 	ctx.clearRect(0, 0, domElement.width, domElement.height);
+	 	let scene = new Scene(this.sceneConfig.backgroundColor, this.sceneConfig.width, this.sceneConfig.height)
 	 	scene.setBackground()
+	 	//let ball = new Ball(this.ballConfig.radius, this.ballConfig.weight, this.ballConfig.color, this.ballConfig.xPosition, this.ballConfig.yPosition)
 		ball.draw();
 		bat.rectangle()
 		for(let i= brickArrangement[0].length-1; i>=0; i--){
 			const brick = brickArrangement[0][i]
+			//brick = new Brick(brickArrangement[0][i])
 			brick.draw() 
 			brick.collide(ball)
 		}
@@ -53,9 +61,9 @@ class Game{
 		// 	brick.collide(ball)
 		// })
 		//ball.moveBall();
-		ball.collisionDetection()
-
-	 }
+		ball.collisionDetection(bat)
+    	requestAnimationFrame(this.renderToDom.bind(this));
+    }
 
 	 
 }
@@ -101,7 +109,7 @@ let brick7 = new Brick("#ff0066", 25, brickWidth, 50, ((brickWidth+7) *6)+2, 10)
 
 
 let brickArrangement = [[brick1, brick2, brick3, brick4, brick5, brick6, brick7], [...row2Bricks],[...bricks]];
-let scene = new Scene("#000000", 500, 500);
+//let scene = new Scene("#000000", 500, 500);
 let bat = new Bat(50, 70, "#ff1a1a", 50, 50, 96);
 let ball = new Ball(10, 15, "#1a1aff", 50, 93.9);
 // for(let i=0; i< bricksPerRow; i++){
@@ -117,12 +125,26 @@ let ball = new Ball(10, 15, "#1a1aff", 50, 93.9);
 // 	brickArrangement.push(bricks)
 // }
 
-
+let sceneConfig = {
+    height: 500,
+    width: 500,
+    backgroundColor: '#000000',
+    domElement: document.getElementById("circle")
+   // const ctx = domElement.getContext("2d");
+}
+let ballConfig = {
+    radius: 10,
+    weight: 15,
+    color: '#1a1aff',
+    xPosition: 50,
+    yPosition: 93.9,
+}
  
 //renderBallsToScene();
 let game= new Game();
-const animate = () => {
-	game.renderToDom(domElement);
-    requestAnimationFrame(animate);
-}
-animate()
+//game.renderToDom(domElement);
+//const animate = () => {
+	game.renderToDom();
+   //requestAnimationFrame(animate);
+//}
+//animate()

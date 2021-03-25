@@ -1,10 +1,10 @@
 class Ball{
-	constructor(radius, weight, color, x, y){
+	constructor(radius, weight, color, xPosition, yPosition){
 		this.r = radius
 		this.w = weight
 		this.c = color
-		this.x = x
-		this.y = y
+		this.x = xPosition
+		this.y = yPosition
 		this.dx =1
 		this.dy =-1
 	}
@@ -18,34 +18,33 @@ class Ball{
 		ctx.fill();
 	}
 	moveBall(){	
-	    this.x += this.dx * Math.sin(30);
-	    this.y += this.dy * Math.cos(30);
+	    this.x += this.dx * Math.sin(60);
+	    this.y += this.dy * Math.cos(60);
 	}
-	 collisionDetection(){
+	 collisionDetection(bat){
 	 	const canvas = document.getElementById("circle");
 	 	if((this.x/100) *canvas.width+ this.dx > canvas.width-this.r || this.x/100 *canvas.width + this.dx < this.r) {
         	this.dx = -this.dx;
 	    }
-	    if(this.y/100 *canvas.height + this.dy < this.r) {
+	    if(this.y/100 *canvas.height + this.dy < this.r || (this.y/100) *canvas.height + this.dy > canvas.height-this.r) {
 	        this.dy = -this.dy;
 	    }
-	    // if((this.y/100) *canvas.height + this.dy> canvas.height-this.r && ((this.y/100) *canvas.height) > ((this.y/100) *canvas.height - 50)){
-	    // 	if((this.x/100) *canvas.width > (canvas.width-70)/2 && this.x/100 *canvas.width < (canvas.width/2) + 70) {
-	    // 		this.dy = -this.dy;
-	    // 	}	
-	    // }	
-	    if((this.y/100) *canvas.height + this.dy > canvas.height-this.r ){
-			if((this.x/100) *canvas.width > (canvas.width-70)/2 && this.x/100 *canvas.width < (canvas.width/2) + 70) {
-		    	if (((this.y/100) *canvas.height) > ((this.y/100) *canvas.height - 50)) {
-	        		 this.dy = -this.dy;
-	        		 //this.y/100 *canvas.height= (this.y/100) *canvas.height - 50;
-	        	}
-		    	
-		    }
-		    else {
-        		this.dy = -this.dy;
-        	}	
+	    if((this.x/100) *canvas.width+ this.dx > bat.x/100 *(canvas.width-70) && (this.x/100) *canvas.width < (bat.x/100 *canvas.width) + 70 && (this.y/100) *canvas.height +this.r  > (bat.y/100) *canvas.height){
+	    	this.dy = -this.dy;
 	    }
+	    
+	  //   if((this.y/100) *canvas.height + this.dy > canvas.height-this.r ){
+			// if((this.x/100) *canvas.width > bat.x/100 *(canvas.width-70) && this.x/100 *canvas.width < bat.x/100 *(canvas.width/2) + bat.width) {
+		 //    	if (((this.y/100) *canvas.height) +this.r> ((bat.y/100) *canvas.height - bat.height)) {
+	  //       		 this.dy = -this.dy;
+	  //       		 //this.y/100 *canvas.height= (this.y/100) *canvas.height - 50;
+	  //       	}
+		    	
+		 //    }
+		 //    else {
+   //      		this.dy = -this.dy;
+   //      	}	
+	  //   }
 
 	    this.x += this.dx * Math.sin(60);
 	    this.y += this.dy * Math.cos(60);  
