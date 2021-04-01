@@ -11,7 +11,7 @@ class Game{
 			sceneConfig: sceneConfig,
 			// bricksConfig: bricksConfig,
 			// batConfig: batConfig,
-			ballConfig: ballConfig
+			//ballConfig: ballConfig
 		}){
 		this.sceneConfig=config.sceneConfig
 		this.bricksConfig = config.bricksConfig
@@ -61,7 +61,7 @@ class Game{
 		// 	brick.collide(ball)
 		// })
 		//ball.moveBall();
-		ball.collisionDetection(bat)
+		ball.collisionDetection(bat);
     	requestAnimationFrame(this.renderToDom.bind(this));
     }
 

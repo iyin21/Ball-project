@@ -26,14 +26,17 @@ class Ball{
 	 	if((this.x/100) *canvas.width+ this.dx > canvas.width-this.r || this.x/100 *canvas.width + this.dx < this.r) {
         	this.dx = -this.dx;
 	    }
-	    if(this.y/100 *canvas.height + this.dy < this.r || (this.y/100) *canvas.height + this.dy > canvas.height-this.r) {
+	    if(this.y/100 *canvas.height + this.dy < this.r) {
 	        this.dy = -this.dy;
 	    }
-	    if((this.x/100) *canvas.width+ this.dx > bat.x/100 *(canvas.width-70) && (this.x/100) *canvas.width < (bat.x/100 *canvas.width) + 70 && (this.y/100) *canvas.height +this.r  > (bat.y/100) *canvas.height){
+	    //if((this.x/100) *canvas.width+ this.dx > bat.x/100 *(canvas.width-70) && (this.x/100) *canvas.width < (bat.x/100 *canvas.width) + 70 && (this.y/100) *canvas.height +this.r  > (bat.y/100) *canvas.height){
+	    if((this.x/100) *canvas.width+ this.dx > bat.x && (this.x/100) *canvas.width < (bat.x+ 70) && (this.y/100) *canvas.height +this.r  > (bat.y/100) *canvas.height){
 	    	this.dy = -this.dy;
 	    }
 	    
-	  //   if((this.y/100) *canvas.height + this.dy > canvas.height-this.r ){
+	    // if((ball.y/100) *canvas.height + ball.dy > canvas.height-ball.r ){
+	    // 	updateGameState(gameStates.LOSE, "GAME OVER!");
+	    // }	
 			// if((this.x/100) *canvas.width > bat.x/100 *(canvas.width-70) && this.x/100 *canvas.width < bat.x/100 *(canvas.width/2) + bat.width) {
 		 //    	if (((this.y/100) *canvas.height) +this.r> ((bat.y/100) *canvas.height - bat.height)) {
 	  //       		 this.dy = -this.dy;
@@ -46,8 +49,8 @@ class Ball{
    //      	}	
 	  //   }
 
-	    this.x += this.dx * Math.sin(60);
-	    this.y += this.dy * Math.cos(60);  
+	    this.x += this.dx 
+	    this.y += this.dy 
     }
 }	
 
